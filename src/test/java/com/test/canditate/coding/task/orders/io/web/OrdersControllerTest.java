@@ -42,11 +42,13 @@ public class OrdersControllerTest {
         orange.setArticle("orange");
         orange.setCost(25);
         orange.setQuantity(1);
+        orange.setActiveOffer(false);
 
         Order apple = new Order();
         apple.setArticle("apple");
         apple.setCost(60);
         apple.setQuantity(1);
+        apple.setActiveOffer(false);
 
         orders.add(apple);
         orders.add(orange);
@@ -63,6 +65,41 @@ public class OrdersControllerTest {
                 .characterEncoding("utf-8")
                 .content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
                 .andExpect(jsonPath("$.totalAmount", Matchers.equalTo(85)));
+
+    }
+
+
+    @Test
+    public void createOrderPromotionTest() throws Exception {
+
+        List<Order> orders = new ArrayList<>();
+        Order orange = new Order();
+        orange.setArticle("orange");
+        orange.setCost(25);
+        orange.setQuantity(3);
+        orange.setActiveOffer(true);
+
+        Order apple = new Order();
+        apple.setArticle("apple");
+        apple.setCost(60);
+        apple.setQuantity(1);
+        apple.setActiveOffer(true);
+
+        orders.add(apple);
+        orders.add(orange);
+
+        ResponseOrder responseOrder = ResponseOrder.builder().totalAmount(135).orderList(orders).build();
+        Mockito.when(service.createOrder(ArgumentMatchers.any())).thenReturn(responseOrder);
+
+        ServiceOrder serviceOrder = new ServiceOrder();
+        serviceOrder.setOrders(orders);
+
+        String json = mapper.writeValueAsString(serviceOrder);
+
+        mockMvc.perform(post("/api/v1/create-order").contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
+                .andExpect(jsonPath("$.totalAmount", Matchers.equalTo(135)));
 
     }
 }
