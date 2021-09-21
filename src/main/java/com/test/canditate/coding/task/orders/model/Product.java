@@ -4,7 +4,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class Order implements Serializable {
+public class Product implements Serializable {
     public String article;
     public int cost;
     public int quantity;

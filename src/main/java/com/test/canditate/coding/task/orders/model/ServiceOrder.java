@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class ServiceOrder implements Serializable {
-    public List<Order> orders;
+    public List<Product> products;
 }

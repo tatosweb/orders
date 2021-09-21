@@ -1,8 +1,8 @@
-package com.test.canditate.coding.task.orders.io.web;
+package com.test.canditate.coding.task.products.io.web;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.canditate.coding.task.orders.model.Order;
+import com.test.canditate.coding.task.orders.model.Product;
 import com.test.canditate.coding.task.orders.model.ResponseOrder;
 import com.test.canditate.coding.task.orders.model.ServiceOrder;
 import com.test.canditate.coding.task.orders.service.OrderService;
@@ -37,27 +37,27 @@ public class OrdersControllerTest {
     @Test
     public void createOrderTest() throws Exception {
 
-        List<Order> orders = new ArrayList<>();
-        Order orange = new Order();
+        List<Product> products = new ArrayList<>();
+        Product orange = new Product();
         orange.setArticle("orange");
         orange.setCost(25);
         orange.setQuantity(1);
         orange.setActiveOffer(false);
 
-        Order apple = new Order();
+        Product apple = new Product();
         apple.setArticle("apple");
         apple.setCost(60);
         apple.setQuantity(1);
         apple.setActiveOffer(false);
 
-        orders.add(apple);
-        orders.add(orange);
+        products.add(apple);
+        products.add(orange);
 
-        ResponseOrder responseOrder = ResponseOrder.builder().totalAmount(85).orderList(orders).build();
+        ResponseOrder responseOrder = ResponseOrder.builder().totalAmount(85).productList(products).build();
         Mockito.when(service.createOrder(ArgumentMatchers.any())).thenReturn(responseOrder);
 
         ServiceOrder serviceOrder = new ServiceOrder();
-        serviceOrder.setOrders(orders);
+        serviceOrder.setProducts(products);
 
         String json = mapper.writeValueAsString(serviceOrder);
 
@@ -72,27 +72,27 @@ public class OrdersControllerTest {
     @Test
     public void createOrderPromotionTest() throws Exception {
 
-        List<Order> orders = new ArrayList<>();
-        Order orange = new Order();
+        List<Product> products = new ArrayList<>();
+        Product orange = new Product();
         orange.setArticle("orange");
         orange.setCost(25);
         orange.setQuantity(3);
         orange.setActiveOffer(true);
 
-        Order apple = new Order();
+        Product apple = new Product();
         apple.setArticle("apple");
         apple.setCost(60);
         apple.setQuantity(1);
         apple.setActiveOffer(true);
 
-        orders.add(apple);
-        orders.add(orange);
+        products.add(apple);
+        products.add(orange);
 
-        ResponseOrder responseOrder = ResponseOrder.builder().totalAmount(135).orderList(orders).build();
+        ResponseOrder responseOrder = ResponseOrder.builder().totalAmount(135).productList(products).build();
         Mockito.when(service.createOrder(ArgumentMatchers.any())).thenReturn(responseOrder);
 
         ServiceOrder serviceOrder = new ServiceOrder();
-        serviceOrder.setOrders(orders);
+        serviceOrder.setProducts(products);
 
         String json = mapper.writeValueAsString(serviceOrder);
 

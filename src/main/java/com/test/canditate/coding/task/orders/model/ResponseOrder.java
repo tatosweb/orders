@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 @Builder
 public class ResponseOrder {
-    private List<Order> orderList;
+    private List<Product> productList;
     private int totalAmount;
+    private Long orderId;
 }

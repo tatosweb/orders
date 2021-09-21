@@ -1,4 +1,4 @@
-package com.test.canditate.coding.task.orders;
+package com.test.canditate.coding.task;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

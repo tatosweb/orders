@@ -1,6 +1,7 @@
-package com.test.canditate.coding.task.orders.service;
+package com.test.canditate.coding.task.products.service;
 
-import com.test.canditate.coding.task.orders.model.Order;
+import com.test.canditate.coding.task.orders.service.OrderServiceImpl;
+import com.test.canditate.coding.task.orders.model.Product;
 import com.test.canditate.coding.task.orders.model.ResponseOrder;
 import com.test.canditate.coding.task.orders.model.ServiceOrder;
 import org.junit.Assert;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OrderServiceTest {
+public class ProductServiceTest {
 
     @Autowired
     private OrderServiceImpl service;
@@ -23,25 +24,25 @@ public class OrderServiceTest {
     @Test
     public void createOrderTest() {
 
-        List<Order> orders = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
 
-        Order orange = new Order();
+        Product orange = new Product();
         orange.setArticle("orange");
         orange.setCost(25);
         orange.setQuantity(1);
         orange.setActiveOffer(false);
 
-        Order apple = new Order();
+        Product apple = new Product();
         apple.setArticle("apple");
         apple.setCost(60);
         apple.setQuantity(1);
         apple.setActiveOffer(false);
 
-        orders.add(apple);
-        orders.add(orange);
+        products.add(apple);
+        products.add(orange);
 
         ServiceOrder serviceOrder = new ServiceOrder();
-        serviceOrder.setOrders(orders);
+        serviceOrder.setProducts(products);
 
         ResponseOrder responseOrder = service.createOrder(serviceOrder);
         Assert.assertNotNull(responseOrder);
@@ -51,25 +52,25 @@ public class OrderServiceTest {
     @Test
     public void createOrderPromotionTest() {
 
-        List<Order> orders = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
 
-        Order orange = new Order();
+        Product orange = new Product();
         orange.setArticle("orange");
         orange.setCost(25);
         orange.setQuantity(3);
         orange.setActiveOffer(true);
 
-        Order apple = new Order();
+        Product apple = new Product();
         apple.setArticle("apple");
         apple.setCost(60);
         apple.setQuantity(1);
         apple.setActiveOffer(true);
 
-        orders.add(apple);
-        orders.add(orange);
+        products.add(apple);
+        products.add(orange);
 
         ServiceOrder serviceOrder = new ServiceOrder();
-        serviceOrder.setOrders(orders);
+        serviceOrder.setProducts(products);
 
         ResponseOrder responseOrder = service.createOrder(serviceOrder);
         Assert.assertNotNull(responseOrder);
